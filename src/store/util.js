@@ -22,7 +22,7 @@ export const setWhatsapp = (n) => {
 };
 export const waLink = (text) => `https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`;
 
-export const productUrl = (p) => `/producto.html?p=${encodeURIComponent(p.slug)}`;
+export const productUrl = (p) => `producto.html?p=${encodeURIComponent(p.slug)}`;
 
 // "35–40" si las tallas son consecutivas; si no, "35, 36, 38"
 export const sizesLabel = (sizes = []) => {

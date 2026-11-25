@@ -52,7 +52,7 @@ async function boot() {
 }
 
 async function checkAdmin() {
-  app.innerHTML = `<div class="adm-boot"><img src="/brand/logo-isa.svg" alt="isa" /><p>Verificando permisos…</p></div>`;
+  app.innerHTML = `<div class="adm-boot"><img src="brand/logo-isa.svg" alt="isa" /><p>Verificando permisos…</p></div>`;
   let ok = false;
   try {
     ok = await api.isAdmin(user.id);
@@ -71,7 +71,7 @@ function renderSetup() {
   app.innerHTML = `
     <main class="auth auth--setup">
       <section class="auth__card setup">
-        <img class="auth__logo" src="/brand/logo-isa.svg" alt="isa" />
+        <img class="auth__logo" src="brand/logo-isa.svg" alt="isa" />
         <p class="eyebrow">Panel de administración</p>
         <h1>Conectemos tu tienda</h1>
         <p class="muted">El panel necesita una base de datos en Supabase para guardar colecciones, productos y pedidos. Solo se configura una vez:</p>
@@ -86,7 +86,7 @@ VITE_SUPABASE_ANON_KEY=eyJhbGciOi...</code></pre></li>
           <li>Reinicia el servidor de desarrollo (<code>npm run dev</code>) y recarga esta página.</li>
         </ol>
         ${demoLink}
-        <a class="btn btn--ghost" href="/">Volver a la tienda</a>
+        <a class="btn btn--ghost" href="./">Volver a la tienda</a>
       </section>
     </main>`;
 }
@@ -96,7 +96,7 @@ function renderLogin() {
   app.innerHTML = `
     <main class="auth">
       <form class="auth__card" id="login-form" novalidate>
-        <img class="auth__logo" src="/brand/logo-isa.svg" alt="isa" />
+        <img class="auth__logo" src="brand/logo-isa.svg" alt="isa" />
         <p class="eyebrow">Panel de administración</p>
         <h1>Bienvenida</h1>
         ${api.demo ? '<p class="note">Modo demo: cualquier correo y contraseña sirven.</p>' : ''}
@@ -106,7 +106,7 @@ function renderLogin() {
           <input type="password" name="password" autocomplete="current-password" required /></label>
         <p class="form-error" data-error hidden></p>
         <button class="btn btn--primary btn--block" data-busy="Ingresando…">Ingresar</button>
-        <a class="auth__back" href="/">← Volver a la tienda</a>
+        <a class="auth__back" href="./">← Volver a la tienda</a>
       </form>
     </main>`;
   const form = $('#login-form');
@@ -138,7 +138,7 @@ function renderNoAccess() {
   app.innerHTML = `
     <main class="auth">
       <section class="auth__card">
-        <img class="auth__logo" src="/brand/logo-isa.svg" alt="isa" />
+        <img class="auth__logo" src="brand/logo-isa.svg" alt="isa" />
         <h1>Acceso restringido</h1>
         <p class="muted">Tu usuario no tiene permisos de administrador.</p>
         <p class="muted small">Sesión iniciada como <strong>${esc(user?.email)}</strong>.</p>
@@ -171,18 +171,18 @@ function renderShell() {
   app.innerHTML = `
     <div class="shell">
       <aside class="side">
-        <a class="side__logo" href="#/colecciones"><img src="/brand/logo-isa-white.svg" alt="isa" /></a>
+        <a class="side__logo" href="#/colecciones"><img src="brand/logo-isa-white.svg" alt="isa" /></a>
         <p class="side__tag">Panel</p>
         <nav class="side__nav" aria-label="Secciones">${nav}</nav>
         <div class="side__foot">
           ${api.demo ? '<span class="badge badge--gold">Modo demo</span>' : ''}
           <p class="side__user" title="${esc(user?.email)}">${esc(user?.email)}</p>
-          <a class="side__link" href="/" target="_blank" rel="noopener">${icon('eye')}Ver tienda</a>
+          <a class="side__link" href="./" target="_blank" rel="noopener">${icon('eye')}Ver tienda</a>
           <button class="side__link" data-logout>${icon('logout')}Cerrar sesión</button>
         </div>
       </aside>
       <header class="topbar">
-        <img src="/brand/logo-isa.svg" alt="isa" />
+        <img src="brand/logo-isa.svg" alt="isa" />
         ${api.demo ? '<span class="badge badge--gold">Demo</span>' : ''}
         <button class="icon-btn" data-logout aria-label="Cerrar sesión">${icon('logout')}</button>
       </header>

@@ -14,7 +14,7 @@ const TAG_SUGGESTIONS = ['Nuevo', 'Top', 'Últimos', 'Oferta'];
 // Filtros recordados mientras la pestaña esté abierta
 const filters = { q: '', collection: '', category: '', active: '' };
 
-export const productUrl = (slug) => `/producto.html?p=${encodeURIComponent(slug)}`;
+export const productUrl = (slug) => `producto.html?p=${encodeURIComponent(slug)}`;
 
 export async function renderProducts(ctx) {
   const { api, root, isCurrent } = ctx;

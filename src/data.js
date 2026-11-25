@@ -4,10 +4,10 @@
 export const WHATSAPP = '573015928067';
 
 export const categories = [
-  { id: 'tacones', name: 'Tacones', img: '/products/08-pump-negro-charol.jpg' },
-  { id: 'slingbacks', name: 'Slingbacks', img: '/products/09-tacon-noche.jpg' },
-  { id: 'plataformas', name: 'Plataformas', img: '/products/12-alpargata-plata.jpg' },
-  { id: 'planos', name: 'Planos', img: '/products/05-baleta-gemas.jpg' },
+  { id: 'tacones', name: 'Tacones', img: 'products/08-pump-negro-charol.jpg' },
+  { id: 'slingbacks', name: 'Slingbacks', img: 'products/09-tacon-noche.jpg' },
+  { id: 'plataformas', name: 'Plataformas', img: 'products/12-alpargata-plata.jpg' },
+  { id: 'planos', name: 'Planos', img: 'products/05-baleta-gemas.jpg' },
 ];
 
 // MUESTRA: colección de ejemplo para el modo sin Supabase. Las colecciones reales se crean en el panel.
@@ -17,7 +17,7 @@ export const collections = [
     name: 'Colección Esencia',
     season: 'Temporada actual',
     description: 'Tacones, slingbacks, plataformas y planos con diseño atemporal: piezas pensadas para acompañarte de la oficina a la noche.',
-    cover: '/products/07-pump-nude.jpg',
+    cover: 'products/07-pump-nude.jpg',
     featured: true,
     sample: true,
   },
@@ -26,7 +26,7 @@ export const collections = [
 // Transportadoras con las que se puede despachar (preferencia de la clienta, no compromiso de servicio)
 export const carriers = ['Servientrega', 'Coordinadora', 'Interrapidísimo', 'Envía', 'TCC'];
 
-const p = (n, slug) => `/products/${String(n).padStart(2, '0')}-${slug}.jpg`;
+const p = (n, slug) => `products/${String(n).padStart(2, '0')}-${slug}.jpg`;
 const range = (from, to) => Array.from({ length: to - from + 1 }, (_, i) => String(from + i));
 const S35_40 = range(35, 40);
 const S35_39 = range(35, 39);

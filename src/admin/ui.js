@@ -148,7 +148,7 @@ export const loadingHtml = (text = 'Cargando…') =>
 
 export const emptyHtml = (title, text = '', action = '') =>
   `<div class="state state--empty">
-     <img src="/brand/logo-isa.svg" alt="" aria-hidden="true" />
+     <img src="brand/logo-isa.svg" alt="" aria-hidden="true" />
      <h3>${esc(title)}</h3>
      ${text ? `<p>${esc(text)}</p>` : ''}
      ${action}

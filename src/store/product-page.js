@@ -23,13 +23,13 @@ else renderProduct(product);
 function renderNotFound() {
   document.title = 'Producto no encontrado · isa';
   setMeta('name', 'robots', 'noindex');
-  $('[data-breadcrumb]').innerHTML = '<a href="/">Inicio</a><span aria-current="page">Producto no encontrado</span>';
+  $('[data-breadcrumb]').innerHTML = '<a href="./">Inicio</a><span aria-current="page">Producto no encontrado</span>';
   body.innerHTML = `<div class="pdp-empty">
     <p class="eyebrow">Ups</p>
     <h1>Producto no encontrado</h1>
     <p>Es posible que este modelo ya no esté disponible o que el enlace esté incompleto.</p>
     <div class="pdp-empty__cta">
-      <a class="btn btn--primary" href="/#novedades">Ver todos los modelos</a>
+      <a class="btn btn--primary" href="./#novedades">Ver todos los modelos</a>
       <a class="btn btn--ghost" target="_blank" rel="noopener" href="${esc(waLink('Hola isa, estoy buscando un modelo y no lo encontré en la tienda.'))}">Preguntar por WhatsApp</a>
     </div>
   </div>`;
@@ -50,8 +50,8 @@ function renderProduct(p) {
   if (p.img) setMeta('property', 'og:image', new URL(p.img, location.origin).href);
   setMeta('property', 'og:url', new URL(productUrl(p), location.origin).href);
 
-  $('[data-breadcrumb]').innerHTML = `<a href="/">Inicio</a>
-    ${category ? `<a href="/?cat=${encodeURIComponent(category.id)}#novedades">${esc(category.name)}</a>` : ''}
+  $('[data-breadcrumb]').innerHTML = `<a href="./">Inicio</a>
+    ${category ? `<a href="./?cat=${encodeURIComponent(category.id)}#novedades">${esc(category.name)}</a>` : ''}
     <span aria-current="page">${esc(p.name)}</span>`;
 
   // Especificaciones: filas derivadas siempre + las que defina la tienda (products.specs)
@@ -96,7 +96,7 @@ function renderProduct(p) {
 
     <div class="pdp__info">
       <div class="pdp__badges">
-        ${collection ? `<a class="badge badge--gold" href="/?col=${encodeURIComponent(collection.id)}#novedades">${esc(collection.name)}${collection.season ? ` · ${esc(collection.season)}` : ''}</a>` : ''}
+        ${collection ? `<a class="badge badge--gold" href="./?col=${encodeURIComponent(collection.id)}#novedades">${esc(collection.name)}${collection.season ? ` · ${esc(collection.season)}` : ''}</a>` : ''}
         ${category ? `<span class="badge">${esc(category.name)}</span>` : ''}
       </div>
       <h1 class="pdp__title">${esc(p.name)}</h1>

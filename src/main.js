@@ -112,13 +112,13 @@ if ((params.has('cat') || params.has('col')) && location.hash === '#novedades') 
 function initHeroVideo() {
   const PLAYLIST = {
     desktop: [
-      { src: '/media/hero-tacon-negro.mp4', pos: 'center 70%' },
-      { src: '/media/hero-tacon-coral.mp4', pos: 'center 80%' },
+      { src: 'media/hero-tacon-negro.mp4', pos: 'center 70%' },
+      { src: 'media/hero-tacon-coral.mp4', pos: 'center 80%' },
     ],
     mobile: [
-      { src: '/media/m-hero-tenis.mp4', pos: 'center 60%' },
-      { src: '/media/m-hero-botas.mp4', pos: 'center 70%' },
-      { src: '/media/m-hero-tacon-negro.mp4', pos: 'center' },
+      { src: 'media/m-hero-tenis.mp4', pos: 'center 60%' },
+      { src: 'media/m-hero-botas.mp4', pos: 'center 70%' },
+      { src: 'media/m-hero-tacon-negro.mp4', pos: 'center' },
     ],
   };
   const heroVideos = [...document.querySelectorAll('[data-hero-video]')];
