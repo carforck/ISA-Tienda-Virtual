@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>isa · Tienda Virtual</title>
+  <meta name="description" content="isa — calzado femenino con estilo: tacones, slingbacks, plataformas y planos." />
+  <link rel="icon" type="image/svg+xml" href="/brand/logo-isa.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <div class="announce">Envío gratis en compras superiores a $150.000 · Cambios de talla gratis hasta 30 días</div>
+
+  <header class="header" data-header>
+    <div class="container header__inner">
+      <a href="/" class="logo" aria-label="isa — inicio">
+        <img class="logo__gold" src="/brand/logo-isa.svg" alt="isa" />
+        <img class="logo__white" src="/brand/logo-isa-white.svg" alt="" aria-hidden="true" />
+      </a>
+      <nav class="nav" data-nav aria-label="Principal">
+        <a href="#novedades">Novedades</a>
+        <a href="#categorias" data-cat-link="tacones">Tacones</a>
+        <a href="#categorias" data-cat-link="slingbacks">Slingbacks</a>
+        <a href="#categorias" data-cat-link="plataformas">Plataformas</a>
+        <a href="#categorias" data-cat-link="planos">Planos</a>
+        <a href="#historia">Nosotros</a>
+        <div class="nav__foot">
+          <p>Tu esencia, <em>tu poder</em></p>
+          <a class="btn btn--wa" data-wa target="_blank" rel="noopener"><span data-wa-icon></span>Escríbenos</a>
+        </div>
+      </nav>
+      <div class="header__actions">
+        <button class="icon-btn hide-sm" aria-label="Buscar">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        </button>
+        <button class="icon-btn hide-sm" aria-label="Mi cuenta">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>
+        </button>
+        <button class="icon-btn cart-btn" aria-label="Carrito" data-cart-open>
+          <svg viewBox="0 0 24 24"><path d="M5 8h14l-1 13H6L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+          <span class="cart-count" data-cart-count>0</span>
+        </button>
+        <button class="icon-btn menu-toggle" aria-label="Abrir menú" aria-expanded="false" data-menu-toggle>
+          <span class="burger"><i></i><i></i></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <video class="hero__video" data-hero-video muted playsinline preload="auto" aria-hidden="true"></video>
+      <video class="hero__video" data-hero-video muted playsinline preload="metadata" aria-hidden="true"></video>
+      <div class="hero__overlay"></div>
+      <div class="container hero__inner">
+        <div class="hero__text">
+          <p class="eyebrow">Nueva colección</p>
+          <h1>Tu esencia,<br /><em>tu poder</em></h1>
+          <p class="lead">Tacones, slingbacks, plataformas y planos para mujer, con diseño atemporal, horma cómoda y acabados cuidados.</p>
+          <div class="hero__cta">
+            <a href="#novedades" class="btn btn--light">Ver colección</a>
+            <a href="#historia" class="btn btn--ghost-light">Conócenos</a>
+          </div>
+        </div>
+      </div>
+      <button class="hero__toggle" data-hero-toggle aria-label="Pausar video">
+        <svg viewBox="0 0 24 24"><path d="M9 6v12M15 6v12"/></svg>
+      </button>
+    </section>
+
+    <section class="section" id="categorias">
+      <div class="container">
+        <div class="section__head">
+          <p class="eyebrow">Explora</p>
+          <h2>Categorías</h2>
+        </div>
+        <div class="categories" data-categories></div>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="novedades">
+      <div class="container">
+        <div class="section__head section__head--row">
+          <div>
+            <p class="eyebrow">Lo más reciente</p>
+            <h2>Novedades</h2>
+          </div>
+          <div class="filters" data-filters></div>
+        </div>
+        <div class="products" data-products></div>
+      </div>
+    </section>
+
+    <section class="section story" id="historia">
+      <div class="container story__inner">
+        <div class="story__media">
+          <figure class="story__arch">
+            <img src="/products/06-stiletto-dorado.jpg" alt="Stiletto dorado isa" loading="lazy" />
+          </figure>
+          <figure class="story__small">
+            <img src="/products/11-plataforma-dorada.jpg" alt="Plataforma dorada isa" loading="lazy" />
+          </figure>
+          <div class="story__seal" aria-hidden="true">
+            <svg viewBox="0 0 120 120"><defs><path id="seal-circle" d="M60 60m-44 0a44 44 0 1 1 88 0a44 44 0 1 1-88 0"/></defs>
+              <text textLength="274" lengthAdjust="spacing"><textPath href="#seal-circle" textLength="274" lengthAdjust="spacing">TU ESENCIA · TU PODER · TU ESENCIA · TU PODER ·</textPath></text></svg>
+            <img src="/brand/logo-isa.svg" alt="" />
+          </div>
+        </div>
+        <div class="story__content">
+          <p class="eyebrow">Nuestra historia</p>
+          <h2>Eres tú,<br /><em>en tu mejor luz</em></h2>
+          <p class="story__lead">isa nace para la mujer femenina, sofisticada, moderna y segura: la que sabe quién es y camina en consecuencia.</p>
+          <p>Creemos que el calzado correcto cambia la forma en que te mueves por el mundo. Por eso elegimos cada modelo pensando en ti: materiales de calidad, hormas cómodas y diseños que perduran, de la oficina a la noche.</p>
+          <ul class="pillars">
+            <li><span>01</span><div><strong>Diseño atemporal</strong>Piezas que no pasan de moda y se adaptan a tu estilo.</div></li>
+            <li><span>02</span><div><strong>Comodidad real</strong>Hormas pensadas para acompañarte todo el día.</div></li>
+            <li><span>03</span><div><strong>Asesoría cercana</strong>Te ayudamos a elegir tu talla y tu par ideal por WhatsApp.</div></li>
+          </ul>
+          <div class="story__cta">
+            <a href="#novedades" class="btn btn--primary">Descubre la colección</a>
+            <span class="story__sign">Con cariño, <em>el equipo isa</em></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="benefits">
+      <div class="container benefits__grid">
+        <div><strong>Envío a todo el país</strong><span>Recibe en 2 a 5 días hábiles</span></div>
+        <div><strong>Pago seguro</strong><span>Tarjetas, PSE y contraentrega</span></div>
+        <div><strong>Cambios de talla</strong><span>Gratis hasta 30 días después</span></div>
+      </div>
+    </section>
+
+    <section class="section newsletter">
+      <div class="container newsletter__inner">
+        <h2>Únete a la comunidad <em>isa</em></h2>
+        <p>Viste tu esencia, vive tu poder. Recibe lanzamientos y beneficios exclusivos.</p>
+        <form class="newsletter__form" data-newsletter>
+          <input type="email" placeholder="Tu correo electrónico" required />
+          <button class="btn btn--primary" type="submit">Suscribirme</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div>
+          <img class="footer__logo" src="/brand/logo-isa.svg" alt="isa" />
+          <p class="footer__claim">Tu esencia, <em>tu poder</em></p>
+        </div>
+        <a class="btn btn--wa" data-wa target="_blank" rel="noopener"><span data-wa-icon></span>Escríbenos por WhatsApp</a>
+      </div>
+
+      <div class="footer__grid">
+        <div class="footer__col">
+          <h4>Tienda</h4>
+          <a href="#novedades">Novedades</a>
+          <a href="#categorias" data-cat-link="tacones">Tacones</a>
+          <a href="#categorias" data-cat-link="slingbacks">Slingbacks</a>
+          <a href="#categorias" data-cat-link="plataformas">Plataformas</a>
+          <a href="#categorias" data-cat-link="planos">Planos</a>
+        </div>
+        <div class="footer__col">
+          <h4>Ayuda</h4>
+          <a href="#">Guía de tallas</a>
+          <a href="#">Envíos</a>
+          <a href="#">Cambios y devoluciones</a>
+          <a href="#">Preguntas frecuentes</a>
+        </div>
+        <div class="footer__col">
+          <h4>Contacto</h4>
+          <a data-wa target="_blank" rel="noopener">WhatsApp +57 301 592 8067</a>
+          <a href="#">Instagram</a>
+          <a href="#">TikTok</a>
+        </div>
+        <div class="footer__col">
+          <h4>Pagos seguros</h4>
+          <div class="pay">
+            <span>Visa</span><span>Mastercard</span><span>PSE</span><span>Nequi</span><span>Contraentrega</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer__watermark" aria-hidden="true"><img src="/brand/logo-isa.svg" alt="" /></div>
+
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <span>© <span data-year></span> isa · Todos los derechos reservados</span>
+        <nav class="footer__legal" aria-label="Legal"><a href="#">Términos</a><a href="#">Privacidad</a></nav>
+        <a class="footer__credit" href="https://vanttagetech.com" target="_blank" rel="noopener">Hecho por <strong>Vanttage</strong></a>
+      </div>
+    </div>
+  </footer>
+
+  <a class="wa-float" data-wa target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+    <span data-wa-icon></span><span class="wa-float__label">¿Te asesoramos?</span>
+  </a>
+
+  <div class="drawer-backdrop" data-cart-close></div>
+  <aside class="drawer" aria-label="Carrito" data-drawer>
+    <div class="drawer__head">
+      <h3>Tu carrito</h3>
+      <button class="icon-btn" aria-label="Cerrar" data-cart-close>
+        <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+    <div class="drawer__body" data-cart-items></div>
+    <div class="drawer__foot">
+      <div class="drawer__total"><span>Subtotal</span><strong data-cart-total>$0</strong></div>
+      <a class="btn btn--wa btn--block" data-checkout target="_blank" rel="noopener"><span data-wa-icon></span>Finalizar pedido por WhatsApp</a>
+      <p class="drawer__note">Te confirmamos talla, disponibilidad y envío por chat.</p>
+    </div>
+  </aside>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
