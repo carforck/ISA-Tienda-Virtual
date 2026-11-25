@@ -12,7 +12,6 @@
   <link rel="stylesheet" href="/src/style.css" />
 </head>
 <body>
-  <div class="announce">Envío gratis en compras superiores a $150.000 · Cambios de talla gratis hasta 30 días</div>
 
   <header class="header" data-header>
     <div class="container header__inner">
@@ -57,8 +56,9 @@
       <div class="hero__overlay"></div>
       <div class="container hero__inner">
         <div class="hero__text">
+          <img class="hero__logo" src="/brand/logo-isa-white.svg" alt="isa" />
           <p class="eyebrow">Nueva colección</p>
-          <h1>Tu esencia,<br /><em>tu poder</em></h1>
+          <h1 class="hero__title" data-typewriter>Tu esencia,<br /><em>tu poder</em></h1>
           <p class="lead">Tacones, slingbacks, plataformas y planos para mujer, con diseño atemporal, horma cómoda y acabados cuidados.</p>
           <div class="hero__cta">
             <a href="#novedades" class="btn btn--light">Ver colección</a>
@@ -69,6 +69,10 @@
       <button class="hero__toggle" data-hero-toggle aria-label="Pausar video">
         <svg viewBox="0 0 24 24"><path d="M9 6v12M15 6v12"/></svg>
       </button>
+    </section>
+
+    <section class="section season-section" id="coleccion" data-season hidden>
+      <div class="container" data-season-body></div>
     </section>
 
     <section class="section" id="categorias">
@@ -88,8 +92,9 @@
             <p class="eyebrow">Lo más reciente</p>
             <h2>Novedades</h2>
           </div>
-          <div class="filters" data-filters></div>
+          <div class="filters-wrap" data-filters></div>
         </div>
+        <p class="products__status" data-products-status aria-live="polite"></p>
         <div class="products" data-products></div>
       </div>
     </section>
@@ -129,9 +134,9 @@
 
     <section class="benefits">
       <div class="container benefits__grid">
-        <div><strong>Envío a todo el país</strong><span>Recibe en 2 a 5 días hábiles</span></div>
-        <div><strong>Pago seguro</strong><span>Tarjetas, PSE y contraentrega</span></div>
-        <div><strong>Cambios de talla</strong><span>Gratis hasta 30 días después</span></div>
+        <div><strong>Envío nacional</strong><span>Con transportadoras a toda Colombia</span></div>
+        <div><strong>Bajo pedido</strong><span>Preparamos tu par para ti</span></div>
+        <div><strong>Asesoría por WhatsApp</strong><span>Te ayudamos con tu talla</span></div>
       </div>
     </section>
 
@@ -169,8 +174,7 @@
         <div class="footer__col">
           <h4>Ayuda</h4>
           <a href="#">Guía de tallas</a>
-          <a href="#">Envíos</a>
-          <a href="#">Cambios y devoluciones</a>
+          <a href="#">Cómo comprar bajo pedido</a>
           <a href="#">Preguntas frecuentes</a>
         </div>
         <div class="footer__col">
@@ -180,15 +184,14 @@
           <a href="#">TikTok</a>
         </div>
         <div class="footer__col">
-          <h4>Pagos seguros</h4>
+          <h4>Envíos nacionales</h4>
           <div class="pay">
-            <span>Visa</span><span>Mastercard</span><span>PSE</span><span>Nequi</span><span>Contraentrega</span>
+            <span>Servientrega</span><span>Coordinadora</span><span>Interrapidísimo</span><span>Envía</span><span>TCC</span>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="footer__watermark" aria-hidden="true"><img src="/brand/logo-isa.svg" alt="" /></div>
 
     <div class="footer__bottom">
       <div class="container footer__bottom-inner">
@@ -203,21 +206,7 @@
     <span data-wa-icon></span><span class="wa-float__label">¿Te asesoramos?</span>
   </a>
 
-  <div class="drawer-backdrop" data-cart-close></div>
-  <aside class="drawer" aria-label="Carrito" data-drawer>
-    <div class="drawer__head">
-      <h3>Tu carrito</h3>
-      <button class="icon-btn" aria-label="Cerrar" data-cart-close>
-        <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg>
-      </button>
-    </div>
-    <div class="drawer__body" data-cart-items></div>
-    <div class="drawer__foot">
-      <div class="drawer__total"><span>Subtotal</span><strong data-cart-total>$0</strong></div>
-      <a class="btn btn--wa btn--block" data-checkout target="_blank" rel="noopener"><span data-wa-icon></span>Finalizar pedido por WhatsApp</a>
-      <p class="drawer__note">Te confirmamos talla, disponibilidad y envío por chat.</p>
-    </div>
-  </aside>
+  <!-- El carrito y el checkout los inserta src/store/shell.js (compartidos con producto.html) -->
 
   <script type="module" src="/src/main.js"></script>
 </body>

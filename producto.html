@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Producto · isa</title>
+  <meta name="description" content="isa — calzado femenino con estilo: tacones, slingbacks, plataformas y planos." />
+  <meta property="og:type" content="product" />
+  <meta property="og:site_name" content="isa" />
+  <meta property="og:title" content="isa · Tienda Virtual" />
+  <meta property="og:description" content="Calzado femenino bajo pedido con envío nacional." />
+  <meta property="og:image" content="/products/07-pump-nude.jpg" />
+  <link rel="icon" type="image/svg+xml" href="/brand/logo-isa.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+
+  <header class="header header--solid" data-header>
+    <div class="container header__inner">
+      <a href="/" class="logo" aria-label="isa — inicio">
+        <img class="logo__gold" src="/brand/logo-isa.svg" alt="isa" />
+        <img class="logo__white" src="/brand/logo-isa-white.svg" alt="" aria-hidden="true" />
+      </a>
+      <nav class="nav" data-nav aria-label="Principal">
+        <a href="/#novedades">Novedades</a>
+        <a href="/?cat=tacones#novedades">Tacones</a>
+        <a href="/?cat=slingbacks#novedades">Slingbacks</a>
+        <a href="/?cat=plataformas#novedades">Plataformas</a>
+        <a href="/?cat=planos#novedades">Planos</a>
+        <a href="/#historia">Nosotros</a>
+        <div class="nav__foot">
+          <p>Tu esencia, <em>tu poder</em></p>
+          <a class="btn btn--wa" data-wa target="_blank" rel="noopener"><span data-wa-icon></span>Escríbenos</a>
+        </div>
+      </nav>
+      <div class="header__actions">
+        <button class="icon-btn hide-sm" aria-label="Buscar">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        </button>
+        <button class="icon-btn hide-sm" aria-label="Mi cuenta">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>
+        </button>
+        <button class="icon-btn cart-btn" aria-label="Carrito" data-cart-open>
+          <svg viewBox="0 0 24 24"><path d="M5 8h14l-1 13H6L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+          <span class="cart-count" data-cart-count>0</span>
+        </button>
+        <button class="icon-btn menu-toggle" aria-label="Abrir menú" aria-expanded="false" data-menu-toggle>
+          <span class="burger"><i></i><i></i></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="pdp-page" data-pdp>
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Ruta de navegación" data-breadcrumb>
+        <a href="/">Inicio</a>
+      </nav>
+      <div data-pdp-body aria-busy="true">
+        <div class="pdp-loading">Cargando producto…</div>
+      </div>
+    </div>
+    <section class="section section--alt related" data-related hidden aria-labelledby="related-title">
+      <div class="container">
+        <div class="section__head">
+          <p class="eyebrow">Para ti</p>
+          <h2 id="related-title">También te puede gustar</h2>
+        </div>
+        <div class="products products--related" data-related-list></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div>
+          <img class="footer__logo" src="/brand/logo-isa.svg" alt="isa" />
+          <p class="footer__claim">Tu esencia, <em>tu poder</em></p>
+        </div>
+        <a class="btn btn--wa" data-wa target="_blank" rel="noopener"><span data-wa-icon></span>Escríbenos por WhatsApp</a>
+      </div>
+
+      <div class="footer__grid">
+        <div class="footer__col">
+          <h4>Tienda</h4>
+          <a href="/#novedades">Novedades</a>
+          <a href="/?cat=tacones#novedades">Tacones</a>
+          <a href="/?cat=slingbacks#novedades">Slingbacks</a>
+          <a href="/?cat=plataformas#novedades">Plataformas</a>
+          <a href="/?cat=planos#novedades">Planos</a>
+        </div>
+        <div class="footer__col">
+          <h4>Ayuda</h4>
+          <a href="#">Guía de tallas</a>
+          <a href="#">Cómo comprar bajo pedido</a>
+          <a href="#">Preguntas frecuentes</a>
+        </div>
+        <div class="footer__col">
+          <h4>Contacto</h4>
+          <a data-wa target="_blank" rel="noopener">WhatsApp +57 301 592 8067</a>
+          <a href="#">Instagram</a>
+          <a href="#">TikTok</a>
+        </div>
+        <div class="footer__col">
+          <h4>Envíos nacionales</h4>
+          <div class="pay">
+            <span>Servientrega</span><span>Coordinadora</span><span>Interrapidísimo</span><span>Envía</span><span>TCC</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <span>© <span data-year></span> isa · Todos los derechos reservados</span>
+        <nav class="footer__legal" aria-label="Legal"><a href="#">Términos</a><a href="#">Privacidad</a></nav>
+        <a class="footer__credit" href="https://vanttagetech.com" target="_blank" rel="noopener">Hecho por <strong>Vanttage</strong></a>
+      </div>
+    </div>
+  </footer>
+
+  <a class="wa-float" data-wa target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+    <span data-wa-icon></span><span class="wa-float__label">¿Te asesoramos?</span>
+  </a>
+
+  <!-- El carrito y el checkout los inserta src/store/shell.js -->
+  <script type="module" src="/src/store/product-page.js"></script>
+</body>
+</html>

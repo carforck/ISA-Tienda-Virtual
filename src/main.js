@@ -1,137 +1,129 @@
-import { categories, products, WHATSAPP } from './data.js';
+// Página de inicio
+import { $, esc } from './store/util.js';
+import { initShell } from './store/shell.js';
+import { productCard, bindQuickSize } from './store/cards.js';
+import { initTypewriter } from './store/typewriter.js';
 
-const $ = (s, el = document) => el.querySelector(s);
-const money = (n) => '$' + n.toLocaleString('es-CO');
-const waLink = (text) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`;
-export const waIcon = `<svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 7L3 29l6.4-2c2 1.1 4.3 1.7 6.6 1.7 7.2 0 13-5.7 13-12.8S23.2 3 16 3Zm0 23.4c-2.1 0-4.1-.6-5.8-1.6l-.4-.3-3.8 1.2 1.2-3.7-.3-.4c-1.2-1.8-1.8-3.8-1.8-5.9C5.1 10 10 5.2 16 5.2S26.9 10 26.9 15.8 22 26.4 16 26.4Zm6-7.9c-.3-.2-1.9-1-2.2-1.1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.2 2.4 3.6 5.8 5 .8.3 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4Z"/></svg>`;
+initTypewriter($('[data-typewriter]'));
+initHeroVideo();
+bindQuickSize();
 
-// WhatsApp: todos los enlaces con data-wa usan el número de la tienda
-document.querySelectorAll('[data-wa]').forEach((a) => {
-  a.href = waLink(a.dataset.wa || 'Hola isa, quiero más información sobre su calzado.');
-});
+const catalog = await initShell();
+const { products, categories, collections } = catalog;
 
-// Categorías
-const countBy = (id) => products.filter((p) => p.cat === id).length;
+const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
+const params = new URLSearchParams(location.search);
+let activeCat = categories.some((c) => c.id === params.get('cat')) ? params.get('cat') : 'todos';
+let activeCol = collections.some((c) => c.id === params.get('col')) ? params.get('col') : 'todas';
+
+// ───────── Categorías ─────────
 $('[data-categories]').innerHTML = categories
-  .map(
-    (c) => `<a href="#novedades" class="category" data-cat="${c.id}">
-      <img class="category__bg" src="${c.img}" alt="" loading="lazy" />
-      <span><small>${countBy(c.id)} modelos</small>${c.name}</span>
-    </a>`
-  )
+  .map((c) => {
+    const n = products.filter((p) => p.category === c.id).length;
+    return `<a href="#novedades" class="category" data-cat="${esc(c.id)}">
+      ${c.img ? `<img class="category__bg" src="${esc(c.img)}" alt="" loading="lazy" />` : ''}
+      <span><small>${plural(n, 'modelo', 'modelos')}</small>${esc(c.name)}</span>
+    </a>`;
+  })
   .join('');
 
-// Filtros + productos
-let active = 'todos';
-const filterList = [{ id: 'todos', name: 'Todos' }, ...categories];
-const renderFilters = () => {
-  $('[data-filters]').innerHTML = filterList
-    .map((f) => `<button class="chip ${f.id === active ? 'is-active' : ''}" data-filter="${f.id}">${f.name}</button>`)
-    .join('');
-};
-const renderProducts = () => {
-  const list = active === 'todos' ? products : products.filter((p) => p.cat === active);
-  $('[data-products]').innerHTML = list
-    .map(
-      (p) => `<article class="product">
-        <div class="product__media">
-          <img src="${p.img}" alt="${p.name}" loading="lazy" />
-          ${p.tag ? `<span class="product__tag">${p.tag}</span>` : ''}
-          <div class="product__actions">
-            <button class="btn btn--primary product__add" data-add="${p.id}">Agregar</button>
-            <a class="product__wa" target="_blank" rel="noopener" aria-label="Preguntar por WhatsApp"
-              href="${waLink(`Hola isa, me interesa el modelo ${p.name}. ¿Qué tallas tienen disponibles?`)}">${waIcon}</a>
-          </div>
-        </div>
-        <h3>${p.name}</h3>
-        <div class="product__meta"><span>${p.material} · Tallas ${p.sizes}</span><span class="product__price">${money(p.price)}</span></div>
-      </article>`
-    )
-    .join('');
-};
-document.addEventListener('click', (e) => {
-  const f = e.target.closest('[data-filter]');
-  if (f) { active = f.dataset.filter; renderFilters(); renderProducts(); }
-  const c = e.target.closest('[data-cat], [data-cat-link]');
-  if (c) { active = c.dataset.cat || c.dataset.catLink; renderFilters(); renderProducts(); }
-});
-
-// Carrito
-const cart = new Map();
-const renderCart = () => {
-  let count = 0, total = 0;
-  const items = [...cart.entries()].map(([id, qty]) => {
-    const p = products.find((x) => x.id === id);
-    count += qty; total += p.price * qty;
-    return `<div class="cart-item">
-      <img class="cart-item__thumb" src="${p.img}" alt="" />
-      <div><h4>${p.name}</h4><small>${money(p.price)}</small>
-        <div class="qty"><button data-dec="${id}" aria-label="Quitar uno">−</button>${qty}<button data-inc="${id}" aria-label="Agregar uno">+</button></div>
+// ───────── Colección de temporada ─────────
+const colSection = $('[data-season]');
+if (collections.length) {
+  const [main, ...others] = collections;
+  const count = (id) => products.filter((p) => p.collection === id).length;
+  colSection.hidden = false;
+  $('[data-season-body]').innerHTML = `
+    <div class="season">
+      <figure class="season__media">
+        ${main.cover ? `<img src="${esc(main.cover)}" alt="${esc(main.name)}" loading="lazy" />` : ''}
+        ${main.season ? `<figcaption class="season__badge">${esc(main.season)}</figcaption>` : ''}
+      </figure>
+      <div class="season__content">
+        <p class="eyebrow">Colección de temporada</p>
+        <h2>${esc(main.name)}</h2>
+        ${main.description ? `<p class="season__desc">${esc(main.description)}</p>` : ''}
+        <p class="season__meta">${plural(count(main.id), 'modelo', 'modelos')} · Bajo pedido</p>
+        <a href="#novedades" class="btn btn--primary" data-col-filter="${esc(main.id)}">Ver la colección</a>
       </div>
-      <strong>${money(p.price * qty)}</strong>
-    </div>`;
-  });
-  $('[data-cart-items]').innerHTML = items.join('') || '<p class="drawer__empty">Tu carrito está vacío.</p>';
-  $('[data-cart-count]').textContent = count;
-  $('[data-cart-total]').textContent = money(total);
-  const checkout = $('[data-checkout]');
-  checkout.classList.toggle('is-disabled', count === 0);
-  const lines = [...cart.entries()].map(([id, q]) => {
-    const p = products.find((x) => x.id === id);
-    return `• ${q} x ${p.name} — ${money(p.price * q)}`;
-  });
-  checkout.href = waLink(`Hola isa, quiero hacer este pedido:\n${lines.join('\n')}\nSubtotal: ${money(total)}\n\nMi talla es: `);
-};
-function setMenu(open) {
-  document.body.classList.toggle('menu-open', open);
-  const btn = $('[data-menu-toggle]');
-  btn.setAttribute('aria-expanded', open);
-  btn.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+    </div>
+    ${others.length ? `<div class="season__others">
+      ${others.map((c) => `<a href="#novedades" class="season-card" data-col-filter="${esc(c.id)}">
+        ${c.cover ? `<img src="${esc(c.cover)}" alt="" loading="lazy" />` : ''}
+        <span><small>${esc(c.season || 'Colección')}</small>${esc(c.name)}</span>
+      </a>`).join('')}
+    </div>` : ''}`;
 }
-const openCart = () => document.body.classList.add('cart-open');
-const closeCart = () => document.body.classList.remove('cart-open');
+
+// ───────── Filtros + productos ─────────
+const chip = (attr, id, name, active) =>
+  `<button type="button" class="chip ${active ? 'is-active' : ''}" ${attr}="${esc(id)}" aria-pressed="${active}">${esc(name)}</button>`;
+
+const renderFilters = () => {
+  const colRow = collections.length
+    ? `<div class="filters" role="group" aria-label="Filtrar por colección">
+        ${chip('data-filter-col', 'todas', 'Todas las colecciones', activeCol === 'todas')}
+        ${collections.map((c) => chip('data-filter-col', c.id, c.name, activeCol === c.id)).join('')}
+      </div>`
+    : '';
+  const catRow = `<div class="filters" role="group" aria-label="Filtrar por categoría">
+      ${chip('data-filter', 'todos', 'Todos', activeCat === 'todos')}
+      ${categories.map((c) => chip('data-filter', c.id, c.name, activeCat === c.id)).join('')}
+    </div>`;
+  $('[data-filters]').innerHTML = colRow + catRow;
+};
+
+const renderProducts = () => {
+  const list = products.filter(
+    (p) => (activeCat === 'todos' || p.category === activeCat) && (activeCol === 'todas' || p.collection === activeCol)
+  );
+  $('[data-products]').innerHTML = list.length
+    ? list.map((p) => productCard(p)).join('')
+    : `<div class="products__empty"><p>No hay modelos con estos filtros por ahora.</p>
+        <button type="button" class="btn btn--ghost" data-filter-reset>Ver todos los modelos</button></div>`;
+  const col = collections.find((c) => c.id === activeCol);
+  const cat = categories.find((c) => c.id === activeCat);
+  $('[data-products-status]').textContent =
+    `${plural(list.length, 'modelo', 'modelos')}${cat ? ` · ${cat.name}` : ''}${col ? ` · ${col.name}` : ''}`;
+};
+
+const update = () => { renderFilters(); renderProducts(); };
 
 document.addEventListener('click', (e) => {
   const t = e.target;
-  const add = t.closest('[data-add]');
-  if (add) { const id = add.dataset.add; cart.set(id, (cart.get(id) || 0) + 1); renderCart(); openCart(); }
-  const inc = t.closest('[data-inc]');
-  if (inc) { cart.set(inc.dataset.inc, cart.get(inc.dataset.inc) + 1); renderCart(); }
-  const dec = t.closest('[data-dec]');
-  if (dec) { const id = dec.dataset.dec; const q = cart.get(id) - 1; q > 0 ? cart.set(id, q) : cart.delete(id); renderCart(); }
-  if (t.closest('[data-cart-open]')) openCart();
-  if (t.closest('[data-cart-close]')) closeCart();
-  if (t.closest('[data-menu-toggle]')) setMenu(!document.body.classList.contains('menu-open'));
-  if (t.closest('[data-nav] a')) setMenu(false);
+  const f = t.closest('[data-filter]');
+  if (f) { activeCat = f.dataset.filter; return update(); }
+  const fc = t.closest('[data-filter-col]');
+  if (fc) { activeCol = fc.dataset.filterCol; return update(); }
+  const col = t.closest('[data-col-filter]');
+  if (col) { activeCol = col.dataset.colFilter; activeCat = 'todos'; return update(); }
+  const c = t.closest('[data-cat], [data-cat-link]');
+  if (c) { activeCat = c.dataset.cat || c.dataset.catLink; activeCol = 'todas'; return update(); }
+  if (t.closest('[data-filter-reset]')) { activeCat = 'todos'; activeCol = 'todas'; update(); }
 });
-document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeCart(); setMenu(false); } });
-renderFilters();
-renderProducts();
-renderCart();
-document.querySelectorAll('[data-wa-icon]').forEach((el) => (el.innerHTML = waIcon));
+update();
 
-// Newsletter
-$('[data-newsletter]').addEventListener('submit', (e) => {
-  e.preventDefault();
-  e.target.innerHTML = '<p>¡Gracias por suscribirte! ✨</p>';
-});
-$('[data-year]').textContent = new Date().getFullYear();
+// Llegada desde otra página con filtro (?cat= / ?col=): baja al listado
+if ((params.has('cat') || params.has('col')) && location.hash === '#novedades') {
+  requestAnimationFrame(() => $('#novedades').scrollIntoView());
+}
 
-// Hero: varios videos en rotación con fundido; móvil usa versiones verticales
-const PLAYLIST = {
-  desktop: [
-    { src: '/media/hero-tacon-negro.mp4', pos: 'center 70%' },
-    { src: '/media/hero-tacon-coral.mp4', pos: 'center 80%' },
-  ],
-  mobile: [
-    { src: '/media/m-hero-tenis.mp4', pos: 'center 60%' },
-    { src: '/media/m-hero-botas.mp4', pos: 'center 70%' },
-    { src: '/media/m-hero-tacon-negro.mp4', pos: 'center' },
-  ],
-};
-const heroVideos = [...document.querySelectorAll('[data-hero-video]')];
-const heroToggle = $('[data-hero-toggle]');
-if (heroVideos.length) {
+// ───────── Hero: varios videos en rotación con fundido; móvil usa versiones verticales ─────────
+function initHeroVideo() {
+  const PLAYLIST = {
+    desktop: [
+      { src: '/media/hero-tacon-negro.mp4', pos: 'center 70%' },
+      { src: '/media/hero-tacon-coral.mp4', pos: 'center 80%' },
+    ],
+    mobile: [
+      { src: '/media/m-hero-tenis.mp4', pos: 'center 60%' },
+      { src: '/media/m-hero-botas.mp4', pos: 'center 70%' },
+      { src: '/media/m-hero-tacon-negro.mp4', pos: 'center' },
+    ],
+  };
+  const heroVideos = [...document.querySelectorAll('[data-hero-video]')];
+  const heroToggle = $('[data-hero-toggle]');
+  if (!heroVideos.length) return;
   const list = window.matchMedia('(max-width: 760px)').matches ? PLAYLIST.mobile : PLAYLIST.desktop;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let idx = 0, cur = 0, paused = reduced;
@@ -167,22 +159,4 @@ if (heroVideos.length) {
     paused ? heroVideos[cur].pause() : heroVideos[cur].play();
     setIcon();
   });
-}
-
-// Encabezado: transparente sobre el video, sólido al hacer scroll
-const header = $('[data-header]');
-const hero = $('.hero');
-const updateHeader = () => {
-  const limit = hero ? hero.offsetHeight - header.offsetHeight - 20 : 0;
-  header.classList.toggle('is-over', window.scrollY < limit);
-};
-window.addEventListener('scroll', updateHeader, { passive: true });
-window.addEventListener('resize', updateHeader);
-window.matchMedia('(min-width: 1081px)').addEventListener('change', (e) => e.matches && setMenu(false));
-updateHeader();
-
-// Oculta el botón flotante de WhatsApp cuando el footer (que ya tiene uno) está visible
-const footer = $('.footer');
-if (footer && 'IntersectionObserver' in window) {
-  new IntersectionObserver(([e]) => document.body.classList.toggle('footer-visible', e.isIntersecting), { threshold: 0.15 }).observe(footer);
 }

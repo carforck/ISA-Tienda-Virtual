@@ -16,5 +16,8 @@
   "devDependencies": {
     "potrace": "^2.1.8",
     "vite": "^8.3.8"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.119.2"
   }
 }
